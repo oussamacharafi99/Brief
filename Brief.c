@@ -187,7 +187,7 @@ void filtrer() {
     printf("---- > PAR PRIORITE ENTRER 1 ! :\n\n");
     printf("---- > PAR DATE ENTRER 2 ! :\n\n");
     printf("ENTER TON CHOIX ! :");
-    scanf("%d \n", &choice);
+    scanf("%d", &choice);
     switch (choice)
     {
     case 1:
@@ -224,7 +224,7 @@ void filtrer() {
             printf("LA DATE DE VOTRE TACHE EST : JOUR %d / MOIS %d / ANNEE %d \n\n", tache1[i].date.jour, tache1[i].date.mois, tache1[i].date.annee);
             printf("\n---------------------\n");
         }else{
-            printf("ok");
+            printf("ENTRER LA DATE ET MOIS !!");
         }
             }
             
@@ -273,8 +273,25 @@ void menu() {
         }
     } while (choice != 0);
 }
+ void checkUser() {
+    char name[7];
+    int password;
+    printf("\n");
+    printf("For testing this project, enter your name and password!\n");
+    printf("USERNAME :");
+    scanf("%s", name);
+    printf("PASSWORD: ");
+    scanf("%d", &password);
+    if (strcmp(name, "oussama") != 0 || password != 971414) {
+        printf("Invalid username or password. Please try again.\n");
+        checkUser();
+    } else {
+        menu();
+    }
+} 
+
 
 int main() {
-    menu();
+    checkUser();
     return 0;
 }
