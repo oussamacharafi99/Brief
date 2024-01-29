@@ -3,7 +3,7 @@
 #include <string.h>
 
 char important_[20] = "IMPORTANT";
-char pasImportant_[20] = "PASIMPORTANT";
+char pasImportant_[20] = "PAS IMPORTANT";
 
 typedef struct {
     char priorite[20];
@@ -71,7 +71,7 @@ void afficher() {
             printf("CETTE TACHE EST ---> %s\n\n", tache1[i].pre.priorite);
             printf("LE NOME DE VOTRE TACHE EST : %s \n", tache1[i].tache_name);
             printf("LA DESCRIPTION DE VOTRE TACHE EST : %s \n", tache1[i].tache_des);
-            printf("LA DATE DE VOTRE TACHE EST : %d / %d / %d \n", tache1[i].date.jour, tache1[i].date.mois, tache1[i].date.annee);
+                        printf("LA DATE DE VOTRE TACHE EST : JOUR %d / MOIS %d / ANNEE %d \n", tache1[i].date.jour, tache1[i].date.mois, tache1[i].date.annee);
             printf("\n---------------------\n");
         }
     } else {
@@ -178,21 +178,59 @@ void ordonnerTache() {
 };
 
 void filtrer() {
+    int choice;
     char filterChoice[20];
-    printf("Entrez le critere de filtrage (IMPORTANT ou PAS_IMPORTANT) : ");
-    scanf("%s", filterChoice);
+    int annee;
+    int mois;
+    printf("TU VOUDRAIS FILTRER PAR DATE OU PAR PRIORITE !\n");
+    printf("---- > PAR PRIORITE ENTRER 1 ! :\n");
+    printf("---- > PAR DATE ENTRER 2 ! :\n");
+    printf("ENTER TON CHOIX ! :");
+    scanf("%d", &choice);
+    switch (choice)
+    {
+    case 1:
+        printf("Entrez le critere de filtrage (IMPORTANT ou PAS_IMPORTANT) : ");
+         scanf("%s", filterChoice);
 
-    printf("TACHES FILTREES :\n");
-    for (int i = 0; i < taille; i++) {
-        if (strcmp(tache1[i].pre.priorite, filterChoice) == 0) {
+         printf("TACHES FILTREES :\n");
+            for (int i = 0; i < taille; i++) {
+             if (strcmp(tache1[i].pre.priorite, filterChoice) == 0) {
             printf("TACHE NUMERO - %d  \n", i + 1);
-            printf("CETTE TACHE EST ---> %s", tache1[i].pre.priorite);
+            printf("CETTE TACHE EST ---> %s\n", tache1[i].pre.priorite);
             printf("LE NOME DE VOTRE TACHE EST : %s \n", tache1[i].tache_name);
             printf("LA DESCRIPTION DE VOTRE TACHE EST : %s \n", tache1[i].tache_des);
-            printf("LA DATE DE VOTRE TACHE EST : %d / %d / %d \n", tache1[i].date.jour, tache1[i].date.mois, tache1[i].date.annee);
+            printf("LA DATE DE VOTRE TACHE EST : JOUR %d / MOIS %d / ANNEE %d \n", tache1[i].date.jour, tache1[i].date.mois, tache1[i].date.annee);
             printf("\n---------------------\n");
         }
+            }
+        break;
+    case 2:
+            printf("ENTER L'ANNEE !");
+            scanf("%d", &annee);
+            printf("ENTRER LE MOIS !");
+            scanf("%d", &mois);
+    
+            printf("TACHES FILTREES :\n");
+            for (int i = 0; i < taille; i++) {
+             if (tache1[i].date.annee == annee && tache1[i].date.mois == mois) {
+            printf("TACHE NUMERO - %d  \n", i + 1);
+            printf("CETTE TACHE EST ---> %s\n", tache1[i].pre.priorite);
+            printf("LE NOME DE VOTRE TACHE EST : %s \n", tache1[i].tache_name);
+            printf("LA DESCRIPTION DE VOTRE TACHE EST : %s \n", tache1[i].tache_des);
+            printf("LA DATE DE VOTRE TACHE EST : JOUR %d / MOIS %d / ANNEE %d \n", tache1[i].date.jour, tache1[i].date.mois, tache1[i].date.annee);
+            printf("\n---------------------\n");
+        }else{
+            printf("ok");
+        }
+            }
+            
+         break;
+    default:
+        printf("ENTRER NUMERO ENTER 1 ET 2 !");
+        break;
     }
+
 }
 
 void menu() {
