@@ -28,17 +28,35 @@ int taille = 0;
 
 void ajoutee() {
     if (taille < 1000) {
-        printf("ENTRER LE NOM DE VOTRE TACHE :");
+        printf("ENTREZ LE NOM DE VOTRE TACHE :");
         getchar();
-        fgets(tache1[taille].tache_name, sizeof(tache1[taille].tache_name), stdin);
+            fgets(tache1[taille].tache_name, sizeof(tache1[taille].tache_name), stdin);
         printf("ENTER LA DESCRIPTOIN DE VOTRE TACHE :");
-        fgets(tache1[taille].tache_des, sizeof(tache1[taille].tache_des), stdin);
-        printf("ENTRER LE JOUR : ");
-        scanf("%d", &tache1[taille].date.jour);
-        printf("ENTRER LE MOIS : ");
-        scanf("%d", &tache1[taille].date.mois);
-        printf("ENTRER L'ANNEE : ");
-        scanf("%d", &tache1[taille].date.annee);
+        getchar();
+            fgets(tache1[taille].tache_des, sizeof(tache1[taille].tache_des), stdin);
+        printf("ENTREZ LE JOUR : ");
+            scanf("%d", &tache1[taille].date.jour);
+
+            while (tache1[taille].date.jour > 31 || tache1[taille].date.jour < 0)
+            {
+                printf("ENTREZ JOUR ENTRE 1 ET 31 : ");
+                scanf("%d", &tache1[taille].date.jour);
+            }
+            
+        printf("ENTREZ LE MOIS : ");
+            scanf("%d", &tache1[taille].date.mois);
+            while (tache1[taille].date.mois > 12 || tache1[taille].date.mois < 0)
+            {
+                printf("ENTREZ MOIS ENTRE 1 ET 12 : ");
+                scanf("%d", &tache1[taille].date.mois);
+            }
+        printf("ENTREZ L'ANNEE : ");
+            scanf("%d", &tache1[taille].date.annee);
+            while (tache1[taille].date.annee > 10000  || tache1[taille].date.annee < 2023)
+            {
+                printf("ENTREZ UNE ANNEE SUPERIEURE : ");
+                scanf("%d", &tache1[taille].date.annee);
+            }
         
             int choice;
         printf("-----EST-CE QUE CETTE TACHE EST IMPORTANTE OU PAS IMPORTANTE ?----- \n\n");
@@ -68,11 +86,11 @@ void afficher() {
     if (taille > 0) {
         for (int i = 0; i < taille; i++) {
             printf("\n---------------------\n");
-            printf("\nTACHE NUMERO - %d  \n\n", i + 1);
-            printf("CETTE TACHE EST ---> %s\n\n", tache1[i].pre.priorite);
-            printf("LE NOME DE VOTRE TACHE EST : %s \n", tache1[i].tache_name);
-            printf("LA DESCRIPTION DE VOTRE TACHE EST : %s \n", tache1[i].tache_des);
-            printf("LA DATE DE VOTRE TACHE EST : JOUR %d / MOIS %d / ANNEE %d \n", tache1[i].date.jour, tache1[i].date.mois, tache1[i].date.annee);
+            printf("\nTACHE NUMERO - %d  \n", i + 1);
+            printf("CETTE TACHE EST ---> %s\n", tache1[i].pre.priorite);
+            printf("LE NOME DE VOTRE TACHE EST --->   %s\n", tache1[i].tache_name);
+            printf("LA DESCRIPTION DE VOTRE TACHE EST --->   %s\n", tache1[i].tache_des);
+            printf("LA DATE DE VOTRE TACHE EST --->  JOUR %d / MOIS %d / ANNEE %d \n", tache1[i].date.jour, tache1[i].date.mois, tache1[i].date.annee);
             printf("\n---------------------\n");
         }
     } else {
@@ -115,12 +133,29 @@ void modifierTache() {
 
             printf("ENTREZ LE NOUVEAU JOUR DE VOTRE TACHE : ");
             scanf("%d", &tache1[index - 1].date.jour);
-
+            /////
+            while (tache1[index -1].date.jour > 31 || tache1[index - 1].date.jour < 0)
+            {
+                printf("ENTREZ JOUR ENTRE 1 ET 31 : ");
+                scanf("%d", &tache1[index - 1].date.jour);
+            }
+            
             printf("ENTREZ LE NOUVEAU MOIS DE VOTRE TACHE : ");
             scanf("%d", &tache1[index - 1].date.mois);
-
+            /////
+            while (tache1[index - 1].date.mois > 12 || tache1[index - 1].date.mois < 0)
+            {
+                printf("ENTREZ MOIS ENTRE 1 ET 12 : ");
+                scanf("%d", &tache1[index - 1].date.mois);
+            }
             printf("ENTREZ LA NOUVELLE ANNEE DE VOTRE TACHE : ");
             scanf("%d", &tache1[index - 1].date.annee);
+            /////
+            while (tache1[index - 1].date.annee > 10000  || tache1[index - 1].date.annee < 2023)
+            {
+                printf("ENTREZ UNE ANNEE SUPERIEURE A 2023 : ");
+                scanf("%d", &tache1[index - 1].date.annee);
+            }
 
             int choice;
                 printf("-----EST-CE QUE CETTE NOUVEAU TACHE EST IMPORTANTE OU PAS IMPORTANTE ?----- \n\n");
@@ -155,7 +190,7 @@ void ordonnerTache() {
 
             for (int j = 0; j < taille - i - 1; j++) {
                 
-                if (tache1[j].date.annee > tache1[j + 1].date.annee ||
+                if (tache1[j].date.annee >= tache1[j + 1].date.annee ||
                     (tache1[j].date.annee == tache1[j + 1].date.annee
                     &&
                     tache1[j].date.mois > tache1[j + 1].date.mois) ||
@@ -184,8 +219,8 @@ void filtrer() {
     int annee;
     int mois;
     printf("TU VOUDRAIS FILTRER PAR DATE OU PAR PRIORITE !\n\n");
-    printf("---- > PAR PRIORITE ENTRER 1 ! :\n\n");
-    printf("---- > PAR DATE ENTRER 2 ! :\n\n");
+    printf("---- > PAR PRIORITE ENTREZ 1 ! :\n\n");
+    printf("---- > PAR DATE ENTREZ 2 ! :\n\n");
     printf("ENTER TON CHOIX ! :");
     scanf("%d", &choice);
     switch (choice)
@@ -210,7 +245,7 @@ void filtrer() {
     case 2:
             printf("ENTER L'ANNEE !");
             scanf("%d", &annee);
-            printf("ENTRER LE MOIS !");
+            printf("ENTREZ LE MOIS !");
             scanf("%d", &mois);
     
             printf("TACHES FILTREES :\n");
@@ -224,13 +259,13 @@ void filtrer() {
             printf("LA DATE DE VOTRE TACHE EST : JOUR %d / MOIS %d / ANNEE %d \n\n", tache1[i].date.jour, tache1[i].date.mois, tache1[i].date.annee);
             printf("\n---------------------\n");
         }else{
-            printf("ENTRER LA DATE ET MOIS !!");
+            printf("ENTREZ LA DATE ET MOIS !!");
         }
             }
             
          break;
     default:
-        printf("ENTRER NUMERO ENTER 1 ET 2 !");
+        printf("ENTREZ NUMERO ENTER 1 ET 2 !");
         break;
     }
 
